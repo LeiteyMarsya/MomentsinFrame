@@ -80,3 +80,109 @@ body, html {
     font-style: italic;
     margin-top: 10px;
 }
+
+
+#package {
+    text-align: center;
+    padding: 50px;
+    background-color: #f9f9f9;
+}
+
+#package h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#package h3 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+/* Package Card Styling */
+.package-card {
+    display: inline-block;
+    width: 300px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.package-card:hover {
+    transform: scale(1.05);
+}
+
+.package-card h4 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.package-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.package-card ul li {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Pricing and Button */
+.price {
+    font-size: 24px;
+    color: #FF6347;
+    font-weight: bold;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #FF6347;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #FF4500;
+}
+
+/* Accordion Styling */
+.accordion {
+            background-color: #f1f1f1;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        .active, .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: white;
+            overflow: hidden;
+        }
+        h4 {
+            color: #333;
+        }
+        ol, ul {
+            padding-left: 20px;
+        }
