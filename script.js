@@ -177,3 +177,62 @@ function payNow() {
         // Add any other steps for payment handling here if needed
     }
 }
+
+// Validate the email format
+function validateEmail() {
+    const email = document.getElementById("email").value;
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address containing '@'.");
+        return false;
+    }
+    return true;
+}
+
+// Function to validate email and add to cart if valid
+function validateAndAddToCart() {
+    if (validateEmail()) {
+        addToCart();  // Call the addToCart function if the email is valid
+    }
+}
+
+// Function to validate email and proceed to payment if valid
+function validateAndPayNow() {
+    if (validateEmail()) {
+        payNow();  // Call the payNow function if the email is valid
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const minBookingDate = new Date(today.setDate(today.getDate() + 14)).toISOString().split("T")[0];
+    dateInput.setAttribute("min", minBookingDate);
+});
+
+function validateDate() {
+    const dateInput = document.getElementById("date").value;
+    const selectedDate = new Date(dateInput);
+    const today = new Date();
+    const minBookingDate = new Date(today.setDate(today.getDate() + 14));
+
+    if (selectedDate < minBookingDate) {
+        alert("You must book at least 14 days before your selected date.");
+        return false;
+    }
+    return true;
+}
+
+// Update the button functions to include date validation
+function validateAndAddToCart() {
+    if (validateEmail() && validateDate()) {
+        addToCart();
+    }
+}
+
+function validateAndPayNow() {
+    if (validateEmail() && validateDate()) {
+        payNow();
+    }
+}
