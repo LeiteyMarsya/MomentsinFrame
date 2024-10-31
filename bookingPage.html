@@ -14,7 +14,8 @@
             <input type="text" id="name" required>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+
 
             <label for="phone">Phone Number:</label>
             <input type="tel" id="phone" required pattern="[0-9]{10,11}">
@@ -48,11 +49,12 @@
             <label for="totalPrice">Total Price: RM</label>
             <span id="totalPrice">0</span>
 
-            <button type="button" onclick="addToCart()">Add to Cart</button>
-            <button type="button" onclick="payNow()">Pay Now</button>
+            <button type="button" onclick="validateAndAddToCart()">Add to Cart</button>
+            <button type="button" onclick="validateAndPayNow()">Pay Now</button>
+
         </form>
     </section>
 
-    <script src="bookingScript.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
