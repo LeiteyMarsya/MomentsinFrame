@@ -42,21 +42,29 @@ var acc = document.getElementsByClassName("accordion");
         modal.style.display = "none";
     }
     
-// Cart array to store added items
-let cart = [];
+// Initialize cart from localStorage or start with an empty array
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // Function to add item to cart
 function addToCart(packageName, packageType, price) {
-    // Add item to the cart array
     cart.push({ packageName, packageType, price });
+    saveCart();
     updateCartCount();
     alert(`${packageName} - Package ${packageType} added to cart.`);
 }
 
-// Function to update cart item count display
+// Function to save cart to localStorage
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Update cart item count on page load
 function updateCartCount() {
     document.getElementById('cart-count').innerText = cart.length;
 }
+
+// Update the cart count on page load
+document.addEventListener("DOMContentLoaded", updateCartCount);
 
 // Function to open cart modal and display cart items
 function openCart() {
@@ -89,6 +97,7 @@ function closeCart() {
 // Function to remove item from cart
 function removeFromCart(index) {
     cart.splice(index, 1);
+    saveCart();
     updateCartCount();
     openCart(); // Refresh cart view
 }
@@ -101,12 +110,70 @@ function checkout() {
     }
     alert('Proceeding to checkout.');
     cart = []; // Clear cart after checkout
+    saveCart();
     updateCartCount();
     closeCart();
 }
 
 // Update buttons to call addToCart function
 function redirectToBooking(packageName, packageType, price) {
-    addToCart(packageName, packageType, price);
+    localStorage.setItem("selectedPackage", JSON.stringify({ packageName, packageType, price }));
+    window.location.href = "bookingPage.html"; 
 }
 
+
+// Loads selected package details on the booking page
+document.addEventListener("DOMContentLoaded", function () {
+    const selectedPackage = JSON.parse(localStorage.getItem("selectedPackage"));
+    if (selectedPackage && document.getElementById("package")) {
+        document.getElementById("package").value = `${selectedPackage.packageName} ${selectedPackage.packageType}`;
+        document.getElementById("totalPrice").textContent = selectedPackage.price;
+    }
+});
+
+// Add to cart functionality
+function addToCart() {
+    const bookingDetails = getFormData();
+    if (validateForm(bookingDetails)) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(bookingDetails);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Package added to cart!");
+
+        // Optionally, redirect to a main page after adding
+        window.location.href = "front_page.html";;  
+    }
+}
+
+// Validation for form fields
+function validateForm(details) {
+    for (const key in details) {
+        if (details[key] === "") {
+            alert(`Please fill in your ${key}`);
+            return false;
+        }
+    }
+    return true;
+}
+
+// Collect form data
+function getFormData() {
+    return {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        package: document.getElementById("package").value,
+        date: document.getElementById("date").value,
+        address: document.getElementById("address").value,
+        price: document.getElementById("totalPrice").textContent
+    };
+}
+
+// Placeholder for payment
+function payNow() {
+    const bookingDetails = getFormData();
+    if (validateForm(bookingDetails)) {
+        alert("Proceeding to payment...");
+        // Add any other steps for payment handling here if needed
+    }
+}
