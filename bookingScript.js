@@ -22,8 +22,8 @@ function addToCart() {
         localStorage.setItem("cart", JSON.stringify(cart));
         alert("Package added to cart!");
 
-        // Optionally, redirect to a cart page after adding
-        window.location.href = "cart.html";  // Redirect to cart page if desired
+        // Optionally, redirect to a main page after adding
+        window.location.href = "front_page.html";
     }
 }
 
