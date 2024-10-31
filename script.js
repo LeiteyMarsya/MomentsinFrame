@@ -80,7 +80,7 @@ function openCart() {
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
             cartItem.innerHTML = `
-                <p>${item.packageName} - Package ${item.packageType}: RM${item.price}</p>
+                <p> Package ${item.packageType}: RM${item.price}</p>
                 <button onclick="removeFromCart(${index})">Remove</button>
             `;
             cartItemsContainer.appendChild(cartItem);
